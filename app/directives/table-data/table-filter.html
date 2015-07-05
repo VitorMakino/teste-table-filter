@@ -1,15 +1,13 @@
 <div class="panel panel-default">
   <form novalidate role="search" name="searchForm">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Filtro</div>
   <!-- Table -->
 <table class="table table-bordered table-striped">  
     <thead>
       <tr>
-        <td>Name</td>
+        <td>Column Name</td>
 		<td>Operation</td>
-		<td>Searched</td>
-		<td>Action</td>
+		<td>Search</td>
+		<td>Remove filter</td>
       </tr>
     </thead>
     
@@ -18,13 +16,13 @@
       <tr ng-repeat="filter in filters">
         <td>
 		  <select ng-model="filter.name" class="form-control" required name="name" ng-change="addFilter()">
-		    <option value="">-- choose column --</option>
+		    <option value="">-- Choose column --</option>
 			<option ng-repeat="column in columns" value="{{column.property}}">{{column.name}}</option>
 		  </select>
 		</td>
 		<td>
 		  <select ng-model="filter.operator" ng-options="operator for operator in operators" class="form-control" required name="operator" ng-change="addFilter()">
-			<option value="">-- choose operator --</option>
+			<option value="">-- Choose operator --</option>
 		    </select>
 		</td>
 		<td>
@@ -38,7 +36,9 @@
 				  ng-model-options="{ updateOn: 'blur' }">
 		</td>
 		<td>
-	      <button type="remove" class="btn btn-default" ng-click="removeFilter($index)" ng-disabled="!showRemoveButton()">Remove Filter</button>
+		  <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="removeFilter($index)" ng-disabled="!showRemoveButton()">
+			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+		  </button>
 		</td>
       </tr>
 	    
