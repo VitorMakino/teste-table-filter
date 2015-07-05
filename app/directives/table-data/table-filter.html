@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+  <form novalidate role="search" name="searchForm">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Filtro</div>
+  <!-- Table -->
+<table class="table table-bordered table-striped">  
+    <thead>
+      <tr>
+        <td>Name</td>
+		<td>Operation</td>
+		<td>Searched</td>
+		<td>Action</td>
+      </tr>
+    </thead>
+    
+    <tbody>
+	 
+      <tr ng-repeat="filter in filters">
+        <td>
+		  <select ng-model="filter.name" class="form-control" required name="name" ng-change="addFilter()">
+		    <option value="">-- choose column --</option>
+			<option ng-repeat="column in columns" value="{{column.property}}">{{column.name}}</option>
+		  </select>
+		</td>
+		<td>
+		  <select ng-model="filter.operator" ng-options="operator for operator in operators" class="form-control" required name="operator" ng-change="addFilter()">
+			<option value="">-- choose operator --</option>
+		    </select>
+		</td>
+		<td>
+           <input type="text" 
+		          class="form-control" 
+				  id="{{filter.name$index}}" 
+				  placeholder="" 
+				  ng-model="filter.value" 
+				  required name="value" 
+				  ng-change="addFilter()"
+				  ng-model-options="{ updateOn: 'blur' }">
+		</td>
+		<td>
+	      <button type="remove" class="btn btn-default" ng-click="removeFilter($index)" ng-disabled="!showRemoveButton()">Remove Filter</button>
+		</td>
+      </tr>
+	    
+    </tbody>
+    
+  </table>
+  </form>
+</div>
+
+

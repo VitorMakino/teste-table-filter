@@ -1,0 +1,19 @@
+<table class="table table-bordered table-striped">  
+    <thead>
+      <tr>
+        <td ng-repeat="column in columns">
+          <a ng-click="setOrderBy(column,sortReverse)">
+            {{column.name}}
+			<span ng-show="showOrderBy(column)"  ng-class="{'glyphicon glyphicon-menu-down': sortReverse, 'glyphicon glyphicon-menu-up':!sortReverse}"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr ng-repeat="row in data  | queryFilter:query |  orderBy:sortType:sortReverse">
+        <td ng-repeat="column in columns">{{ row[column.property] }}</td>
+      </tr>
+    </tbody>
+    
+  </table>

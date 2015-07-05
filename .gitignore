@@ -1,0 +1,13 @@
+logs/*
+!.gitkeep
+node_modules/
+app/bower_components/
+app/components
+tmp
+.DS_Store
+.idea
+.settings
+.jshintrc
+.project
+.tern-project
+.travis.yml
