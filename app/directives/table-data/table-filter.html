@@ -4,29 +4,34 @@
 <table class="table table-bordered table-striped">  
     <thead>
       <tr>
-        <td>Column Name</td>
+	  	<td>Remove</td>
+        <td>Property</td>
 		<td>Operation</td>
-		<td>Search</td>
-		<td>Remove filter</td>
+		<td>Value</td>
       </tr>
     </thead>
     
     <tbody>
 	 
       <tr ng-repeat="filter in filters">
+	  	<td>
+		  <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="removeFilter($index)" ng-disabled="!showRemoveButton()">
+			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+		  </button>
+		</td>
         <td>
-		  <select ng-model="filter.name" class="form-control" required name="name" ng-change="addFilter()">
+		  <select ng-model="filter.column" class="form-control" required name="name" ng-change="addFilter()" ng-options="column.name for column in columns">
 		    <option value="">-- Choose column --</option>
-			<option ng-repeat="column in columns" value="{{column.property}}">{{column.name}}</option>
 		  </select>
 		</td>
 		<td>
-		  <select ng-model="filter.operator" ng-options="operator for operator in operators" class="form-control" required name="operator" ng-change="addFilter()">
+		  <select ng-model="filter.operator" ng-options="operator.name for operator in operators" class="form-control" required name="operator" ng-change="addFilter()">
 			<option value="">-- Choose operator --</option>
 		    </select>
 		</td>
-		<td>
-           <input type="text" 
+		<td ng-switch on="filter.column.type">
+           <input ng-switch-when="date"
+		          type="date" 
 		          class="form-control" 
 				  id="{{filter.name$index}}" 
 				  placeholder="" 
@@ -34,11 +39,15 @@
 				  required name="value" 
 				  ng-change="addFilter()"
 				  ng-model-options="{ updateOn: 'blur' }">
-		</td>
-		<td>
-		  <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="removeFilter($index)" ng-disabled="!showRemoveButton()">
-			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-		  </button>
+			<input ng-switch-default 
+			      type="text" 
+		          class="form-control" 
+				  id="{{filter.name$index}}" 
+				  placeholder="" 
+				  ng-model="filter.value" 
+				  required name="value" 
+				  ng-change="addFilter()"
+				  ng-model-options="{ updateOn: 'blur' }">	  
 		</td>
       </tr>
 	    
