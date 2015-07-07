@@ -11,3 +11,4 @@ this server is:
 npm start
 ```
 
+Now you can visit http://localhost:8000/app/ to view the application.
